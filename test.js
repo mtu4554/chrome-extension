@@ -160,13 +160,14 @@ async function sendForEvaluation(data){
         'Accept': 'application/json',
         'Content-Type': 'application/json'
         },
-        body: `
-            json-data = {
-                'url':` + url +`
-                'title':` + 'title' + `
-                'text:'` + JSON.stringify(toSend) +`
-            }
-        `
+        // body: `
+        //     json-data={
+        //         'url':` + url +`
+        //         'title':` + 'title' + `
+        //         'text:'` + JSON.stringify(toSend) +`
+        //     }
+        // `
+        body:'json-data={"url_address":"example2.com", "title":"Test Website 15", "text": ["Please please please don’t chase mass infection herd. It’s extremely dangerous.It’s extremely dangerous.It’s extremely dangerous.", "And reinfections very possible with a different variant - which are very common."]}'
     });
 //     console.log(`
 //     {
