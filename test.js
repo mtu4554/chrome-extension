@@ -110,10 +110,11 @@ function blurElements() {
                 console.log(rect.top);
 
                 
-                const html = "<h1>Word</h1>";
-                popup = document.createElement("div");
-                popup.style = "position: fixed; z-index: 100; margin-top: " + (rect.top - 100) + 
-                                "px; margin-left: " + event.pageX + "px; background-color: white; " +
+                const html = "<h1>Pozor ! Tento text môže obsahovať nenávistný obsah.</h1>";
+                popup = document.createElement("div");//(rect.top - 100)event.pageX
+                popup.wmode = "transparent";
+                popup.style = "display: block; position: fixed; z-index: 4000000; top: " + (rect.top - 50) +
+                                "px; left: " + event.pageX + "px; background-color: white; " +
                                 "border-radius: 10px; padding: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;";
                 popup.innerHTML = html;
                 popup.id = "popup";
