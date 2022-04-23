@@ -1,3 +1,7 @@
+
+document.getElementsByTagName("head")[0].innerHTML += '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">'
+
+
 var forbidden = ["DOCUMENT", "SCRIPT", "STYLE"]
 var forbiddenChars = "/[]{}<>!@#$%^&*()".split("")
 function iterateOverDom(element, array){
@@ -153,33 +157,17 @@ async function sendForEvaluation(data){
         toSend.push(element.text);
     });
   
-
-    const response = await fetch("http://sudoisbloat.pythonanywhere.com/get_para", {
-        method: 'POST',
-        mode:'no-cors',
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        body: `
-            json-data = {
-                'url':` + url +`
-                'title':` + 'title' + `
-                'text:'` + JSON.stringify(toSend) +`
-            }
-        `
+    var port = chrome.runtime.connect({
+        name: "Sample Communication"
     });
-//     console.log(`
-//     {
-//         'url':` + url +`
-//         'title':` + 'title' + `
-//         'text'` + JSON.stringify(toSend) +`
-//     }
-// `);
-    response.json().then(data => {
-        console.log("response");
-        console.log(data);
     
+    port.postMessage(
+        '{"url_address":"example2.com",'+
+        ' "title":"Test Website 15",'+
+        ' "text":'+ JSON.stringify(toSend));
+    port.onMessage.addListener(function(msg) {
+        console.log("message recieved in test: " + msg);
+        console.log(msg);
     });
 }
 
@@ -218,7 +206,7 @@ setInterval(() => {
         blurElements();
     }
     isUpdated = true;
-    console.log(isUpdated);
+    // console.log(isUpdated);
 }, 2000);
 
 
