@@ -109,13 +109,14 @@ function blurElements() {
                 }
 
                 const rect = element.getBoundingClientRect();
-                console.log(rect.top);
+
+                const topPosition = rect.top < 50 ? 0 : rect.top - 50;
 
                 
-                const html = "<h1 style=\"font-size: 15px; color: black\">Pozor ! Tento text môže obsahovať nenávistný obsah.</h1>";
+                const html = "<div style=\"font-size: 15px; color: black\">Pozor ! Tento text môže obsahovať nenávistný obsah.</div>";
                 popup = document.createElement("div");//(rect.top - 100)event.pageX
                 popup.wmode = "transparent";
-                popup.style = "display: block; position: fixed; z-index: 4000000; top: " + (rect.top - 50) +
+                popup.style = "display: block; position: fixed; z-index: 4000000; top: " + topPosition +
                                 "px; left: " + event.pageX + "px; background-color: white; " +
                                 "border-radius: 10px; padding: 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;";
                 popup.innerHTML = html;

@@ -9,13 +9,17 @@ const data = { username: 'example' };
 
 chrome.tabs.onUpdated.addListener(function (tabId) {
     console.log(tabId);
-    chrome.scripting.executeScript({ 
-        target: {tabId: tabId, allFrames: true}, 
-        files: ["test.js"],
-    });
-    chrome.scripting.executeScript({ 
-        target: {tabId: tabId, allFrames: true}, 
-        files: ["hateful_op.js"],
+    chrome.storage.local.get(["switching"], function(data){
+        if(data["switching"] == "on") {
+            chrome.scripting.executeScript({ 
+                target: {tabId: tabId, allFrames: true}, 
+                files: ["test.js"],
+            });
+            chrome.scripting.executeScript({ 
+                target: {tabId: tabId, allFrames: true}, 
+                files: ["hateful_op.js"],
+            });
+        }
     });
     // chrome.tabs.sendMessage(activeInfo.tab.id, {text: 'report_back'}, doStuffWithDom);
 });

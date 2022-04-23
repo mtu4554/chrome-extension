@@ -18,6 +18,10 @@ button.current {
     color: white;
     background-color: #1B998B;
     transition: 0.3s;
+    margin-left: 0px;
+    margin-top: 5px;
+    padding: 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #dashboardButton:hover {
@@ -25,13 +29,64 @@ button.current {
 }
 
 #mainIcon {
-    height: 60%;
-    width: 100px;
-    padding-right: 30px;
-    margin-top: 15%;
+    margin: auto;
+    height: 40%;
+    margin-top: 30%;
+}
+
+#imageDiv {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    background-color: #eeeeee;
+    transition: 0.3s;
+}
+
+#on_off {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    color: #a1a1a1;
+    text-align: center;
+}
+
+#imageDiv:hover {
+    background-color: #dddddd;
+}
+
+#imageDiv:active {
+    background-color: #cccccc;
+}
+
+
+#controlDiv {
+    padding: 10px;
+    width: 300px;
+    margin-left: 20px;
 }
 
 #mainLayout {
     display: flex;
-    padding: 20px;
+    padding: 0px;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+#reload {
+    background-color: white;
+    color: #505050;
+    font-weight: bolder;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+
+#reload:hover {
+    background-color: white;
+    color: black;
 }
