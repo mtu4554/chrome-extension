@@ -7,14 +7,14 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const data = { username: 'example' };
 
-chrome.tabs.onActivated.addListener(function( activeInfo) {
-    console.log(activeInfo.tabId);
+chrome.tabs.onUpdated.addListener(function (tabId) {
+    console.log(tabId);
     chrome.scripting.executeScript({ 
-        target: {tabId: activeInfo.tabId, allFrames: true}, 
+        target: {tabId: tabId, allFrames: true}, 
         files: ["test.js"],
     });
     chrome.scripting.executeScript({ 
-        target: {tabId: activeInfo.tabId, allFrames: true}, 
+        target: {tabId: tabId, allFrames: true}, 
         files: ["hateful_op.js"],
     });
     // chrome.tabs.sendMessage(activeInfo.tab.id, {text: 'report_back'}, doStuffWithDom);
