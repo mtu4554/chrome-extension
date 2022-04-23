@@ -11,6 +11,7 @@
         "http://*/",
         "https://*/"],
         
+        
     "host_permissions": ["storage", "activeTab", "scripting","tabs",
         "notifications",
         "http://*/",
@@ -25,6 +26,12 @@
             "128": "/images/icon.png"
         }
     },
+
+    "content_security_policy": {
+        "extension_pages": "default-src 'self'; connect-src http://sudoisbloat.pythonanywhere.com; data: blob: filesystem:;"
+      },
+
+  
     "icons": {
         "16": "/images/icon.png",
         "32": "/images/icon.png",

@@ -39,3 +39,51 @@ chrome.tabs.onUpdated.addListener(function (tabId) {
 //     method: "GET"
 // }).then(response => response.json);
 
+
+chrome.runtime.onMessage.addListener(
+
+    function(request, sendResponse) {
+
+    var url = 'http://sudoisbloat.pythonanywhere.com/get_para_get/' + request.jsonData;
+    console.log(url);
+
+    fetch(url) .then(response => console.log(response.json())).then(
+        ()=> chrome.extension.sendRequest({method: 'addToMasterTicker', data:amount}, function(response) {}
+    ));
+
+  
+    // chrome.runtime.sendMessage({'dummydata':"yes"});
+ 	// 	//sendResponse("hey")  
+
+
+    return true;
+});
+
+chrome.runtime.onConnect.addListener(function(port) {
+    console.log("Connected .....");
+    port.onMessage.addListener(function(msg) {
+        console.log("message recieved " + msg);
+    //     var url = 'http://sudoisbloat.pythonanywhere.com/get_para_get/' + msg;
+    //     console.log(url);
+    
+    
+    //fetch(url).then(response => console.log(response.text()) //.then(response =>  //
+     fetch("http://sudoisbloat.pythonanywhere.com/get_para", {
+        method: 'POST',
+        mode:'no-cors',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        body: msg
+    }).then(response => response.json()).then(data=>{
+
+        // chrome.extension.sendRequest({method: 'addToMasterTicker', data:amount}, function(response) {});
+        port.postMessage(data);
+    });
+
+   
+    
+        
+    });
+});
