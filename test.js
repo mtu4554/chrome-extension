@@ -99,7 +99,7 @@ function blurElements() {
             element.addEventListener("mouseenter", function(event) {
                 
                 element.style = "color: transparent; text-shadow: 0 0 8px #000;"
-                
+                  
                 try {
                     const oldPopup = document.getElementById("popup");
                     document.body.removeChild(oldPopup);
