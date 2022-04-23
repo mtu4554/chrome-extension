@@ -13,6 +13,10 @@ chrome.tabs.onActivated.addListener(function( activeInfo) {
         target: {tabId: activeInfo.tabId, allFrames: true}, 
         files: ["test.js"],
     });
+    chrome.scripting.executeScript({ 
+        target: {tabId: activeInfo.tabId, allFrames: true}, 
+        files: ["hateful_op.js"],
+    });
     // chrome.tabs.sendMessage(activeInfo.tab.id, {text: 'report_back'}, doStuffWithDom);
 });
 

@@ -1,14 +1,21 @@
 var forbidden = ["DOCUMENT", "SCRIPT", "STYLE"]
-
+var forbiddenChars = "/[]{}<>!@#$%^&*()".split("")
 function iterateOverDom(element, array){
     for (let i = 0; i < element.children.length; i++) {
         text = getDirectLastText(element.children[i]).trim().replaceAll("  ", "").replaceAll("\t", "");
+        
+        forbiddenChars.forEach(element => {
+            text.replaceAll(element, "");
+        });
+
         //console.log( element.tagName)
         if(text.length > 0 &&  !forbidden.includes(element.tagName)){
             //element.children[i].id = makeid(7);
             object = {
                 "id": getSelector(element.children[i]),//element.children[i].id,
                 "text": text,
+                "blured": true,
+                "sent": false
             }
 
             array.push(object);
@@ -69,11 +76,6 @@ function filterData(dataArray){
     return output;
 }
 
-function sendForEvaluation(data, url){
-    // post
-}
-
-
 var wordList = iterateOverDom(document.body, []);
 console.log(wordList)
 
@@ -92,7 +94,7 @@ function blurElements() {
             
         }
 
-        if(element != null) {
+        if(element != null && object.blured) {
             const style = element.style;
             element.style = blured;
 
@@ -134,6 +136,67 @@ function blurElements() {
     });
 }
 
+async function sendForEvaluation(data){
+    // post
+    let url = window.location.href;
+    notsent = []
+    wordList.forEach(element => {
+        if(element.sent === false){
+            notsent.push(element);
+        }
+    });
+    toSend = [];
+
+    notsent.forEach(element => {
+        toSend.push(element.text);
+    });
+  
+
+    const response = await fetch("http://sudoisbloat.pythonanywhere.com/get_para", {
+        method: 'POST',
+        mode:'no-cors',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        body: `
+            json-data = {
+                'url':` + url +`
+                'title':` + 'title' + `
+                'text:'` + JSON.stringify(toSend) +`
+            }
+        `
+    });
+//     console.log(`
+//     {
+//         'url':` + url +`
+//         'title':` + 'title' + `
+//         'text'` + JSON.stringify(toSend) +`
+//     }
+// `);
+    response.json().then(data => {
+        console.log("response");
+        console.log(data);
+    
+    });
+}
+
+function mergeLists(first, second){
+    output = [];
+    for(var i = 0; i < second.length;i++){
+        for(var j = 0; j < first.length;j++){
+            if(first[j].id === second[i].id && first[j].sent === true){
+                output.push = first[j]
+                break;
+            }else{
+                output.push(second[i]);
+                break;
+            }
+        };
+    };
+
+    return output;
+}
 
 let isUpdated = false;
 console.log("you hsouldnt be here");
@@ -147,13 +210,16 @@ document.addEventListener("scroll", function(e){
 setInterval(() => {
     if(!isUpdated){
         console.log("resized" + isUpdated);
-        wordList = iterateOverDom(document.body, []);
+        wordList = mergeLists(wordList, iterateOverDom(document.body, []));
         console.log(wordList);
+        sendForEvaluation(wordList);
         blurElements();
     }
     isUpdated = true;
     console.log(isUpdated);
 }, 2000);
+
+
 
     // console.log(document);
 
