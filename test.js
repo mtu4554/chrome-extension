@@ -112,7 +112,7 @@ function blurElements() {
                 console.log(rect.top);
 
                 
-                const html = "<h1>Pozor ! Tento text môže obsahovať nenávistný obsah.</h1>";
+                const html = "<h1 style=\"font-size: 15px; color: black\">Pozor ! Tento text môže obsahovať nenávistný obsah.</h1>";
                 popup = document.createElement("div");//(rect.top - 100)event.pageX
                 popup.wmode = "transparent";
                 popup.style = "display: block; position: fixed; z-index: 4000000; top: " + (rect.top - 50) +
