@@ -165,8 +165,8 @@ async function sendForEvaluation(data){
     });
 
     port.postMessage({msg:
-        '{"url_address":"example3.com",'+
-        ' "title":"Test Website 15",'+
+        '{"url_address":'+ window.location.href +','+
+        ' "title":'+ document.title +','+
         ' "text":'+ JSON.stringify(toSend) + '}', dataSend: toSend});
     port.onMessage.addListener(function(msg) {
         console.log("message recieved in test: " + msg.output);
