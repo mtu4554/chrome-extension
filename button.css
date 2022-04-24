@@ -75,12 +75,14 @@ button.current {
 }
 
 #triangle {
+    justify-self: center;
     width: 0;
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 70px solid red;
-    border-radius: 10px;
+    border-bottom: 80px solid red;
+    border-radius: 20px;
+    
 }
 
 #white_circle {
@@ -137,10 +139,10 @@ body {
     place-items: center;
 }
 .stickRotator{
-    width: 150%;
-    height: 30%;
+    width: 20;
+    height: 200%;
     /* background-color: aqua; */
-    transform: rotate(170deg);
+    transform: rotate(87deg);
 }
 .visible{
     border-radius: 0 50px 50px 0;

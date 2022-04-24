@@ -154,10 +154,7 @@ async function sendForEvaluation(data){
     toSend = [];
 
     notsent.forEach(element => {
-   
             toSend.push(element.text.replaceAll(/[^\x00-\x7F]/g, ""));
-      
-
     });
   
     var port = chrome.runtime.connect({
