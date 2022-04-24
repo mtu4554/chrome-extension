@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="button.css"> -->
+    <style>
+        #mainLayout{
+            border: 1px solid black;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        .title_cont{
+            flex: 1;
+            border: 1px solid black;
+          
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .title{
+            text-align: end;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.25rem;
+            margin-right: 5%;
+        }
+        
+        .middle_cont{
+            display: flex;
+            border: 1px solid black;
+            flex-direction: row;
+            flex: 3;
+        }
+        .left{
+            /* display:grid;
+             border: 1px solid black;  */
+            display: block;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+        .right{
+            text-align: end;  
+        }
+        /* .right > * {
+            margin-right: 20%;
+        } */
+
+        .bottom_cont{
+            border: 1px solid black;
+            flex:1;
+        }
+        .outerCircle{
+    margin-top: 30;
+    width: 110px;
+    height: 60px;
+    border-radius: 100px 100px 0 0 ;
+    background-color: rgb(165, 39, 39);
+}
+
+.innerCircle{
+    transition: 0.3s;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 90px;
+    height: 50px;
+    border-radius: 100px 100px 0 0 ;
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    place-items: center;
+}
+.stickRotator{
+    width: 150%;
+    height: 30%;
+    /* background-color: aqua; */
+    transform: rotate(60deg);
+}
+.visible{
+    border-radius: 0 50px 50px 0;
+    width: 60%;
+    height: 100%;
+    background-color: rgb(255, 81, 0);
+}
+    </style>
+</head>
+
+<body>
+    <div id="mainLayout">
+        <div class="title_cont">
+            <h1 class="title">Hate Meter</h1>
+        </div>
+        <div class="middle_cont">
+            <div class="left">
+                <div class="outerCircle">
+                    <div class="innerCircle">
+                        <div class="stickRotator">
+                            <div class="visible">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+            </div>
+            
+        </div>
+        <div class="right">
+            <h1 class="score">
+                21%
+            </h1>
+            <p class="underline">SCORE:</p>
+        </div>
+      
+    </div>
+    <div class="bottom_cont">
+        <button class="more_button">see more</button>
+    </div>
+</body>
+
+</html>

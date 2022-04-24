@@ -1,4 +1,3 @@
-
 document.getElementsByTagName("head")[0].innerHTML += '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">'
 
 
@@ -81,7 +80,7 @@ function filterData(dataArray){
 }
 
 var wordList = iterateOverDom(document.body, []);
-console.log(wordList)
+// console.log(wordList)
 
 
 function blurElements() {
@@ -169,20 +168,20 @@ async function sendForEvaluation(data){
         ' "title":"Test Website 15",'+
         ' "text":'+ JSON.stringify(toSend) + '}', dataSend: toSend});
     port.onMessage.addListener(function(msg) {
-        console.log("message recieved in test: " + msg.output);
-        console.log(msg);
+        // console.log("message recieved in test: " + msg.output);
+        // console.log(msg);
         for(var i = 0; i< notsent.length; i++){
 
-            notsent[i].blured = msg[i] == "negative" ? true : false;
+            notsent[i].blured =  true //: false;
             notsent[i].sent = true;
             
         }
 
         wordList = mergeLists( notsent,wordList);
-        console.log(wordList)
-        console.log("//////////////");
-        console.log(notsent)
-        console.log("updated!!!");
+        // console.log(wordList)
+        // console.log("//////////////");
+        // console.log(notsent)
+        // console.log("updated!!!");
 
     });
 }
@@ -205,19 +204,19 @@ function mergeLists(first, second){
 }
 
 let isUpdated = false;
-console.log("you shouldn't be here!");
+// console.log("you shouldn't be here!");
 //on scroll -> ud = true
 
 document.addEventListener("scroll", function(e){
-    console.log("uuweee!");
+    // console.log("uuweee!");
     isUpdated = false;
 })
 
 setInterval(() => {
     if(!isUpdated){
-        console.log("resized" + isUpdated);
+        // console.log("resized" + isUpdated);
         wordList = mergeLists(wordList, iterateOverDom(document.body, []));
-        console.log(wordList);
+        // console.log(wordList);
         sendForEvaluation(wordList);
         blurElements();
     }
