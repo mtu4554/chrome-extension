@@ -28,7 +28,7 @@
     },
 
     "content_security_policy": {
-        "extension_pages": "default-src 'self'; connect-src http://sudoisbloat.pythonanywhere.com; data: blob: filesystem:;"
+        "extension_pages": "default-src 'self'; connect-src http://sudoisbloat.pythonanywhere.com;"
       },
 
   

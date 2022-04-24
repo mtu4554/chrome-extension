@@ -65,8 +65,8 @@ chrome.runtime.onMessage.addListener(
 
 chrome.runtime.onConnect.addListener(function(port) {
     console.log("Connected .....");
-    port.onMessage.addListener(function(msg) {
-        console.log("message recieved " + msg);
+    port.onMessage.addListener(function(datas) {
+        console.log(datas);
     //     var url = 'http://sudoisbloat.pythonanywhere.com/get_para_get/' + msg;
     //     console.log(url);
     
@@ -75,15 +75,15 @@ chrome.runtime.onConnect.addListener(function(port) {
      fetch("http://sudoisbloat.pythonanywhere.com/get_para", {
         method: 'POST',
         mode:'no-cors',
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        body: msg
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           },
+        body: datas.msg
     }).then(response => response.json()).then(data=>{
-
+        console.log(data);
         // chrome.extension.sendRequest({method: 'addToMasterTicker', data:amount}, function(response) {});
-        port.postMessage(data);
+        port.postMessage({ output: data, input: datas.dataSend});
     });
 
    

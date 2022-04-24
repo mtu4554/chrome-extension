@@ -18,7 +18,7 @@ function iterateOverDom(element, array){
             object = {
                 "id": getSelector(element.children[i]),//element.children[i].id,
                 "text": text,
-                "blured": true,
+                "blured": false,
                 "sent": false
             }
 
@@ -155,20 +155,36 @@ async function sendForEvaluation(data){
     toSend = [];
 
     notsent.forEach(element => {
-        toSend.push(element.text);
+   
+            toSend.push(element.text.replaceAll(/[^\x00-\x7F]/g, ""));
+      
+
     });
   
     var port = chrome.runtime.connect({
         name: "Sample Communication"
     });
-    
-    port.postMessage(
-        '{"url_address":"example2.com",'+
+
+    port.postMessage({msg:
+        '{"url_address":"example3.com",'+
         ' "title":"Test Website 15",'+
-        ' "text":'+ JSON.stringify(toSend));
+        ' "text":'+ JSON.stringify(toSend) + '}', dataSend: toSend});
     port.onMessage.addListener(function(msg) {
-        console.log("message recieved in test: " + msg);
+        console.log("message recieved in test: " + msg.output);
         console.log(msg);
+        for(var i = 0; i< notsent.length; i++){
+
+            notsent[i].blured = msg[i] == "negative" ? true : false;
+            notsent[i].sent = true;
+            
+        }
+
+        wordList = mergeLists( notsent,wordList);
+        console.log(wordList)
+        console.log("//////////////");
+        console.log(notsent)
+        console.log("updated!!!");
+
     });
 }
 
@@ -176,8 +192,8 @@ function mergeLists(first, second){
     output = [];
     for(var i = 0; i < second.length;i++){
         for(var j = 0; j < first.length;j++){
-            if(first[j].id === second[i].id && first[j].sent === true){
-                output.push = first[j]
+            if(first[j].id === second[i].id && first[j].sent == true){
+                output.push(first[j])
                 break;
             }else{
                 output.push(second[i]);
@@ -190,7 +206,7 @@ function mergeLists(first, second){
 }
 
 let isUpdated = false;
-console.log("you hsouldnt be here");
+console.log("you shouldn't be here!");
 //on scroll -> ud = true
 
 document.addEventListener("scroll", function(e){
