@@ -49,7 +49,7 @@ chrome.runtime.onMessage.addListener(
 
     function(request, sendResponse) {
 
-    var url = 'http://sudoisbloat.pythonanywhere.com/get_para_get/' + request.jsonData;
+    var url = 'http://sudoisbloat.pythonanywhere.com/get-website-info/' + request.url;
     console.log(url);
 
     fetch(url) .then(response => console.log(response.json())).then(

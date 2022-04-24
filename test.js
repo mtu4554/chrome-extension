@@ -12,7 +12,7 @@ function iterateOverDom(element, array){
         });
 
         //console.log( element.tagName)
-        if(text.length > 0 &&  !forbidden.includes(element.tagName)){
+        if(text.length > 0 &&  !forbidden.includes(element.tagName && text.split(" ").length > 3)){
             //element.children[i].id = makeid(7);
             object = {
                 "id": getSelector(element.children[i]),//element.children[i].id,
@@ -161,28 +161,35 @@ async function sendForEvaluation(data){
         name: "Sample Communication"
     });
 
+  
+
     port.postMessage({msg:
-        '{"url_address":'+ window.location.href +','+
-        ' "title":'+ document.title +','+
-        ' "text":'+ JSON.stringify(toSend) + '}', dataSend: toSend});
+        '{"url_address":"'+ window.location.hostname +'",'+
+        ' "title":"'+ document.title +'",'+
+        ' "text":'+ JSON.stringify(toSend) + '}', dataSend: toSend
+    });
+
     port.onMessage.addListener(function(msg) {
         console.log("message recieved in test: " + msg.output);
         console.log(msg);
         for(var i = 0; i < notsent.length; i++){
 
             console.log(msg.output.sequence[i]);
+
             notsent[i].blured =  msg.output.sequence[i] == "negative" ? true : false;
             notsent[i].sent = true;
             
         }
 
         wordList = mergeLists( notsent,wordList);
-        // console.log(wordList)
-        // console.log("//////////////");
-        // console.log(notsent)
-        // console.log("updated!!!");
+        console.log(wordList)
+        console.log("//////////////");
+        console.log(notsent)
+        console.log("updated!!!");
+        blurElements();
 
     });
+
 }
 
 function mergeLists(first, second){
@@ -198,7 +205,9 @@ function mergeLists(first, second){
             }
         };
     };
-
+    console.log("sss00")
+    console.log(output)
+    console.log("dsad")
     return output;
 }
 
@@ -218,7 +227,7 @@ setInterval(() => {
         // console.log(wordList);
         sendForEvaluation(wordList);
         console.log(wordList);
-        blurElements();
+      
     }
     isUpdated = true;
     // console.log(isUpdated);

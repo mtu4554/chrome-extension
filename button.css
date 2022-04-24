@@ -12,6 +12,12 @@ button.current {
                 0 0 0 4px black;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap%27");
+
+* {
+    font-family: Comfortaa;
+}
+
 #dashboardButton {
     width: 100px;
     height: 50px;
@@ -22,6 +28,7 @@ button.current {
     margin-top: 5px;
     padding: 0px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
 }
 
 #dashboardButton:hover {
@@ -64,7 +71,7 @@ button.current {
 
 #controlDiv {
     padding: 10px;
-    width: 300px;
+    width: 200px;
     margin-left: 20px;
 }
 
@@ -82,6 +89,7 @@ button.current {
     border-right: 15px solid transparent;
     border-bottom: 80px solid red;
     border-radius: 20px;
+    margin-top: 35px;
     
 }
 
@@ -124,7 +132,7 @@ body {
     width: 150px;
     height: 75px;
     border-radius: 100px 100px 0 0 ;
-    background-color: rgb(165, 39, 39);
+    background-color: #2d3047;
 }
 
 .innerCircle{
@@ -140,10 +148,11 @@ body {
 }
 .stickRotator{
     width: 20;
-    height: 200%;
-    /* background-color: aqua; */
-    transform: rotate(87deg);
+    height: 180%;
+    transform: rotate(-90deg);
+    transition: 2s;
 }
+
 .visible{
     border-radius: 0 50px 50px 0;
     width: 60%;
