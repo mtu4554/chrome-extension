@@ -98,6 +98,7 @@ function blurElements() {
             
         }
 
+        console.log(object.blured);
         if(element != null && object.blured) {
             const style = element.style;
             element.style = blured;
