@@ -13,12 +13,13 @@ chrome.tabs.onUpdated.addListener(function (tabId) {
         if(data["switching"] == "on") {
             chrome.scripting.executeScript({ 
                 target: {tabId: tabId, allFrames: true}, 
-                files: ["test.js"],
+                files: ["hateful_op.js"],
             });
             chrome.scripting.executeScript({ 
                 target: {tabId: tabId, allFrames: true}, 
-                files: ["hateful_op.js"],
+                files: ["test.js"],
             });
+         
         }
     });
     // chrome.tabs.sendMessage(activeInfo.tab.id, {text: 'report_back'}, doStuffWithDom);

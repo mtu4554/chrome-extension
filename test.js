@@ -1,4 +1,3 @@
-
 document.getElementsByTagName("head")[0].innerHTML += '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">'
 
 
@@ -81,7 +80,7 @@ function filterData(dataArray){
 }
 
 var wordList = iterateOverDom(document.body, []);
-console.log(wordList)
+// console.log(wordList)
 
 
 function blurElements() {
@@ -181,11 +180,11 @@ async function sendForEvaluation(data){
         }
 
         wordList = mergeLists( notsent,wordList);
-        console.log(wordList)
-        console.log("//////////////");
-        console.log(notsent)
-        console.log("updated!!!");
-        blurElements();
+        // console.log(wordList)
+        // console.log("//////////////");
+        // console.log(notsent)
+        // console.log("updated!!!");
+
     });
 }
 
@@ -207,19 +206,19 @@ function mergeLists(first, second){
 }
 
 let isUpdated = false;
-console.log("you shouldn't be here!");
+// console.log("you shouldn't be here!");
 //on scroll -> ud = true
 
 document.addEventListener("scroll", function(e){
-    console.log("uuweee!");
+    // console.log("uuweee!");
     isUpdated = false;
 })
 
 setInterval(() => {
     if(!isUpdated){
-        console.log("resized" + isUpdated);
+        // console.log("resized" + isUpdated);
         wordList = mergeLists(wordList, iterateOverDom(document.body, []));
-        console.log(wordList);
+        // console.log(wordList);
         sendForEvaluation(wordList);
         console.log(wordList);
         blurElements();
