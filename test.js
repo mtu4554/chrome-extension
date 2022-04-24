@@ -89,7 +89,7 @@ function blurElements() {
 
     let popup;
     let unBluredElement;
-
+    
     wordList.forEach(object => {
         var element = null;
         try {
@@ -172,9 +172,10 @@ async function sendForEvaluation(data){
     port.onMessage.addListener(function(msg) {
         console.log("message recieved in test: " + msg.output);
         console.log(msg);
-        for(var i = 0; i< notsent.length; i++){
+        for(var i = 0; i < notsent.length; i++){
 
-            notsent[i].blured = msg[i] == "negative" ? true : false;
+            console.log(msg.output.sequence[i]);
+            notsent[i].blured =  msg.output.sequence[i] == "negative" ? true : false;
             notsent[i].sent = true;
             
         }
@@ -184,7 +185,7 @@ async function sendForEvaluation(data){
         console.log("//////////////");
         console.log(notsent)
         console.log("updated!!!");
-
+        blurElements();
     });
 }
 
@@ -220,6 +221,7 @@ setInterval(() => {
         wordList = mergeLists(wordList, iterateOverDom(document.body, []));
         console.log(wordList);
         sendForEvaluation(wordList);
+        console.log(wordList);
         blurElements();
     }
     isUpdated = true;
